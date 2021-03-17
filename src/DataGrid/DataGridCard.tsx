@@ -8,6 +8,8 @@ import makeStyles from '@material-ui/styles/makeStyles';
 import * as React from 'react';
 import { ColumnDataType, ColumnModel } from 'tubular-common';
 import { humanize } from 'uno-js';
+import DetailComponentProps from '../BareBones/DetailComponentProps';
+import { TbSelection } from '../utils/Selection';
 
 const useStyles = makeStyles(() => ({
     cardActions: {
@@ -74,6 +76,9 @@ export interface DataGridCardProps {
     columns: ColumnModel[];
     item: any;
     onClickCallback: (row: any) => void;
+    rowSelectionEnabled?: boolean;
+    selection?: TbSelection;
+    detailComponent?: React.FunctionComponent<DetailComponentProps>;
 }
 
 export const DataGridCard = ({ columns, item, onClickCallback }: DataGridCardProps) => {

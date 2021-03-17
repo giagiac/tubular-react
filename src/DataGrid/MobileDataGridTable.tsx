@@ -2,13 +2,18 @@ import GridList from '@material-ui/core/GridList';
 import * as React from 'react';
 
 import { ITbTableInstance } from 'tubular-react-common';
+import DetailComponentProps from '../BareBones/DetailComponentProps';
 import { TbMobileRow } from '../BareBones/TbMobileRow';
 import { TbRowProps } from '../BareBones/TbRow';
+import { TbSelection } from '../utils/Selection';
 
 export interface MobileDataGridTableProps {
     tbTableInstance: ITbTableInstance;
     rowComponent?: React.FunctionComponent<TbRowProps>;
     onRowClick?(row: any): void;
+    detailComponent?: React.FunctionComponent<DetailComponentProps>;
+    rowSelectionEnabled?: boolean;
+    selection?: TbSelection;
 }
 
 const generateOnRowClickProxy = (onRowClick: any) => {
@@ -25,6 +30,9 @@ export const MobileDataGridTable: React.FunctionComponent<MobileDataGridTablePro
     tbTableInstance,
     rowComponent,
     onRowClick,
+    detailComponent,
+    rowSelectionEnabled,
+    selection,
 }: MobileDataGridTableProps) => {
     const RowComponent = rowComponent ? rowComponent : TbMobileRow;
     const onRowClickProxy = onRowClick ? generateOnRowClickProxy(onRowClick) : (_row: any): (() => void) => void 0;
@@ -38,6 +46,9 @@ export const MobileDataGridTable: React.FunctionComponent<MobileDataGridTablePro
                     rowIndex={index}
                     onRowClick={onRowClickProxy(row)}
                     key={index}
+                    detailComponent={detailComponent || null}
+                    rowSelectionEnabled={rowSelectionEnabled}
+                    selection={selection}
                 />
             ))}
         </GridList>

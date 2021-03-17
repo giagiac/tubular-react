@@ -97,7 +97,9 @@ export const DataGrid: React.FunctionComponent<DataGridProps> = (props: DataGrid
                         gridName={gridName}
                     />
                 )}
-                {showSelectionToolbar && <SelectionToolbar selection={selection} />}
+                {showSelectionToolbar && (
+                    <SelectionToolbar selection={selection} actionsArea={toolbarOptions.actionsArea} />
+                )}
                 <div className={classes.linearProgress} data-testid="linear-progress">
                     {tbTableInstance.state.isLoading && <LinearProgress />}
                 </div>
@@ -105,6 +107,9 @@ export const DataGrid: React.FunctionComponent<DataGridProps> = (props: DataGrid
                     tbTableInstance={tbTableInstance}
                     onRowClick={onRowClick}
                     rowComponent={rowMobileComponent}
+                    detailComponent={detailComponent || null}
+                    rowSelectionEnabled={rowSelectionEnabled}
+                    selection={selection}
                 />
                 <Paginator
                     advancePagination={toolbarOptions.advancePagination}
