@@ -8,12 +8,12 @@ import Lang from '../utils/Lang';
 
 const useStyles = makeStyles({
     caption: {
-        flexShrink: 1,
-        height: '55px',
+        // flexShrink: 1,
+        // height: '55px',
     },
     root: {
-        height: '75px',
-        maxWidth: '95%',
+        // height: '75px',
+        // maxWidth: '95%',
     },
 });
 

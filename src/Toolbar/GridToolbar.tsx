@@ -10,6 +10,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import TuneIcon from '@material-ui/icons/Tune';
 import { FeaturesDrawer } from '../DataGrid/FeaturesDrawer';
 import { ColumnModel, CompareOperators, columnHasFilter } from 'tubular-common';
+import { Box } from '@material-ui/core';
 
 const mobileSpacer: React.CSSProperties = { flexShrink: 1 };
 const spacer: React.CSSProperties = { flex: '1 0' };
@@ -88,13 +89,6 @@ export const GridToolbar: React.FunctionComponent<GridToolbarProps> = ({
                         data-testid="export-button-print"
                     />
                 )}
-                {toolbarOptions.searchText && (
-                    <SearchTextInput
-                        searchText={tbTableInstance.state.searchText}
-                        updateSearchText={tbTableInstance.api.updateSearchText}
-                        data-testid="search-text-input"
-                    />
-                )}
 
                 {enableFeaturesDrawer && (
                     <Tooltip title="Grid features">
@@ -104,6 +98,14 @@ export const GridToolbar: React.FunctionComponent<GridToolbarProps> = ({
                     </Tooltip>
                 )}
             </Toolbar>
+            <Box display="flex" justifyContent="flex-end">
+                {toolbarOptions.searchText && (
+                    <SearchTextInput
+                        searchText={tbTableInstance.state.searchText}
+                        updateSearchText={tbTableInstance.api.updateSearchText}
+                    />
+                )}
+            </Box>
             {enableFeaturesDrawer && isPanelOpen && (
                 <FeaturesDrawer
                     togglePanel={togglePanel}

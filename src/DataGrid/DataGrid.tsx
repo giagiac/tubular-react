@@ -85,14 +85,15 @@ export const DataGrid: React.FunctionComponent<DataGridProps> = (props: DataGrid
     const selection = useTbSelection(tbTableInstance, rowSelectionEnabled);
 
     const showSelectionToolbar = rowSelectionEnabled && selection.getSelectedCount() > 0;
-    const showGridToolbar = toolbarOptions.advancePagination == false &&
-                            toolbarOptions.enablePagination == false &&
-                            toolbarOptions.exportButton == false &&
-                            toolbarOptions.printButton == false &&
-                            toolbarOptions.searchText == false
+    const showGridToolbar =
+        toolbarOptions.advancePagination == false &&
+        toolbarOptions.enablePagination == false &&
+        toolbarOptions.exportButton == false &&
+        toolbarOptions.printButton == false &&
+        toolbarOptions.searchText == false;
 
     if (isMobileResolution) {
-        toolbarOptions.SetMobileMode();
+        //toolbarOptions.SetMobileMode();
 
         return (
             <Paper className={classes.root}>
@@ -117,14 +118,13 @@ export const DataGrid: React.FunctionComponent<DataGridProps> = (props: DataGrid
                     rowSelectionEnabled={rowSelectionEnabled}
                     selection={selection}
                 />
-                {toolbarOptions.enablePagination && 
+                {toolbarOptions.enablePagination && (
                     <Paginator
                         advancePagination={toolbarOptions.advancePagination}
                         rowsPerPageOptions={toolbarOptions.rowsPerPageOptions}
                         tbTableInstance={tbTableInstance}
-        
                     />
-                }
+                )}
             </Paper>
         );
     }
