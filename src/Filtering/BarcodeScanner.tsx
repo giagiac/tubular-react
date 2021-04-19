@@ -66,40 +66,24 @@ export default function BarcodeScanner({ onChange }: any) {
     };
 
     return (
-        <main className="wrapper">
-            <section className="container" id="demo-content">
-                {/* <div id="sourceSelectPanel">
-                    <label htmlFor="sourceSelect">Change video source:</label>
-                    <select id="sourceSelect" onChange={() => setSelectedDeviceId(sourceSelect)}>
-                        {videoInputDevices.map((element, index) => (
+        <>
+            <Grid container justify="center">
+                <Box p={1}>
+                    <Button variant="outlined" id="resetButton" onClick={() => resetClick()}>
+                        Reset
+                    </Button>
+                </Box>
+                <Box p={1}>
+                    <Select variant="outlined" value={selectedDeviceId} onChange={handleChange}>
+                        {videoInputDevices.map((element: any, index) => (
                             <option key={index} value={element.deviceId}>
                                 {element.label}
                             </option>
                         ))}
-                    </select>
-                </div> */}
-                <Grid container justify="center">
-                    <Box p={2}>
-                        <Select variant="outlined" value={selectedDeviceId} onChange={handleChange}>
-                            {videoInputDevices.map((element, index) => (
-                                <option key={index} value={element.deviceId}>
-                                    {element.label}
-                                </option>
-                            ))}
-                        </Select>
-                    </Box>
-                </Grid>
-
-                <video id="video" width="300" height="200" />
-
-                <Grid container justify="center">
-                    <Box p={2}>
-                        <Button id="resetButton" onClick={() => resetClick()}>
-                            Reset
-                        </Button>
-                    </Box>
-                </Grid>
-            </section>
-        </main>
+                    </Select>
+                </Box>
+            </Grid>
+            <video id="video" width="100%" height="100%" />
+        </>
     );
 }

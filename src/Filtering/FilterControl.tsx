@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { ColumnModel, columnHasFilter, ColumnDataType } from 'tubular-common';
 import { StandardFilterEditor } from './StandardFilterEditor';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Theme, makeStyles } from '@material-ui/core/styles';
@@ -30,17 +30,17 @@ export const FilterControl: React.FunctionComponent<FilterControlProps> = ({ col
     const FilterEditor = column.dataType === ColumnDataType.Boolean ? BooleanFilterEditor : StandardFilterEditor;
 
     return (
-        <ExpansionPanel>
-            <ExpansionPanelSummary
+        <Accordion>
+            <AccordionSummary
                 classes={hasFilter ? classes : {}}
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
             >
                 <Typography>{column.label}</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
+            </AccordionSummary>
+            <AccordionDetails>
                 <FilterEditor column={column} onApply={onApply} />
-            </ExpansionPanelDetails>
-        </ExpansionPanel>
+            </AccordionDetails>
+        </Accordion>
     );
 };
