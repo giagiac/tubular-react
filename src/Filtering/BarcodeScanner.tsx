@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import * as React from 'react';
 
 import { BrowserMultiFormatReader, NotFoundException } from '@zxing/library';
-import { Box, Button, Grid, Select } from '@material-ui/core';
+import { Box, Button, Grid, MenuItem, Select } from '@material-ui/core';
+
+const DEVICE_ID = 'DEVICE_ID';
 
 export default function BarcodeScanner({ onChange }: any) {
     const [selectedDeviceId, setSelectedDeviceId] = useState(null);
@@ -16,6 +18,7 @@ export default function BarcodeScanner({ onChange }: any) {
         codeReader
             .listVideoInputDevices()
             .then((videoInputDevices) => {
+                console.log(videoInputDevices);
                 setupDevices(videoInputDevices);
             })
             .catch((err) => {
@@ -27,7 +30,12 @@ export default function BarcodeScanner({ onChange }: any) {
 
     function setupDevices(videoInputDevices: any) {
         // selects first device
-        setSelectedDeviceId(videoInputDevices[0].deviceId);
+        if (localStorage.getItem(DEVICE_ID) === null) {
+            localStorage.setItem(DEVICE_ID, '' + videoInputDevices[0].deviceId);
+            setSelectedDeviceId(videoInputDevices[0].deviceId);
+        } else {
+            setSelectedDeviceId(localStorage.getItem(DEVICE_ID));
+        }
 
         // setup devices dropdown
         if (videoInputDevices.length >= 1) {
@@ -63,6 +71,7 @@ export default function BarcodeScanner({ onChange }: any) {
 
     const handleChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
         setSelectedDeviceId(event.target.value);
+        localStorage.setItem(DEVICE_ID, '' + event.target.value);
     };
 
     return (
@@ -76,9 +85,9 @@ export default function BarcodeScanner({ onChange }: any) {
                 <Box p={1}>
                     <Select variant="outlined" value={selectedDeviceId} onChange={handleChange}>
                         {videoInputDevices.map((element: any, index) => (
-                            <option key={index} value={element.deviceId}>
+                            <MenuItem key={index} value={element.deviceId}>
                                 {element.label}
-                            </option>
+                            </MenuItem>
                         ))}
                     </Select>
                 </Box>
